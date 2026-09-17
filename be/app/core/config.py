@@ -9,18 +9,28 @@ from pydantic_settings import BaseSettings, SettingsConfigDict
 
 class Settings(BaseSettings):
     # Application Info
-    PROJECT_NAME: str = "MeridianPulse Telemetry API"
-    VERSION: str = "1.0.0"
+    PROJECT_NAME: str = "PlenxAI - Generative AI Creator & Automation Platform"
+    VERSION: str = "2.0.0"
     API_V1_STR: str = "/api/v1"
     ENVIRONMENT: str = "development"
     DEBUG: bool = True
 
     # Security & JWT Credentials
-    # In production, SECRET_KEY must be a 64+ char random string loaded from environment
-    SECRET_KEY: str = "meridian-pulse-super-secret-hardened-key-change-in-production-998822"
+    SECRET_KEY: str = "plenxai-enterprise-production-hardened-jwt-secret-key-xyz-888999"
     ALGORITHM: str = "HS256"
-    ACCESS_TOKEN_EXPIRE_MINUTES: int = 30
-    REFRESH_TOKEN_EXPIRE_DAYS: int = 7
+    ACCESS_TOKEN_EXPIRE_MINUTES: int = 60
+    REFRESH_TOKEN_EXPIRE_DAYS: int = 14
+
+    # PlenxAI Economy & Credits
+    NEW_USER_BONUS_CREDITS: int = 100
+    COST_PER_VEO_VIDEO_SEC: int = 2
+    COST_PER_KLING_VIDEO_SEC: int = 3
+    COST_PER_FAST_APP_RENDER: int = 10
+
+    # Upstream AI & Storage Mock/Live Config
+    CLOUDFLARE_R2_BUCKET: str = "plenxai-media-assets"
+    REDIS_QUEUE_URL: str = "redis://localhost:6379/0"
+    RUNNING_HUB_API_KEY: str = "rh-live-comfyui-bridge-mock-key"
 
     # Rate Limiting (Requests per minute per IP for sensitive endpoints)
     RATE_LIMIT_PER_MINUTE: int = 60

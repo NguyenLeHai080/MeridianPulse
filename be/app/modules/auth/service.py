@@ -18,30 +18,42 @@ class AuthService:
         self._init_default_accounts()
 
     def _init_default_accounts(self):
-        """Seed initial accounts for different roles with secure PBKDF2 hashes."""
-        # 1. Admin
+        """Seed initial accounts for PlenxAI roles with secure PBKDF2 hashes."""
+        # 1. Primary Admin (Google Account from Prompt)
         self.create_user(
-            email="admin@meridianpulse.health",
-            password="AdminPassword@2026",
-            full_name="Nguyễn Lê Hải (System Admin)",
+            email="haiyuanhai9@gmail.com",
+            password="Ntt@080220",
+            full_name="Nguyễn Lê Hải (Plenx Super Admin)",
             role=Role.ADMIN,
-            department="Ban Quản Trị Hệ Thống"
+            credit_balance=999999,
+            plan="Enterprise Sovereign"
         )
-        # 2. Doctor (Clinical Specialist)
+        # 2. System Admin
         self.create_user(
-            email="doctor@meridianpulse.health",
-            password="DoctorPassword@2026",
-            full_name="BS.CKII Trần Minh Đức",
-            role=Role.DOCTOR,
-            department="Khoa Hồi Sức Cấp Cứu (ICU)"
+            email="admin@plenxai.com",
+            password="Admin@123456",
+            full_name="PlenxAI System Master",
+            role=Role.ADMIN,
+            credit_balance=500000,
+            plan="Enterprise VIP"
         )
-        # 3. Nurse
+        # 3. Pro Creator
         self.create_user(
-            email="nurse@meridianpulse.health",
-            password="NursePassword@2026",
-            full_name="ĐD. Lê Thị Phương",
-            role=Role.NURSE,
-            department="Khoa Hồi Sức Cấp Cứu (ICU)"
+            email="creator@plenxai.com",
+            password="Creator@123456",
+            full_name="Alex Rivers (AI Filmmaker)",
+            role=Role.VIP_CREATOR,
+            credit_balance=2500,
+            plan="Pro Creator Studio"
+        )
+        # 4. Standard User
+        self.create_user(
+            email="user@plenxai.com",
+            password="User@123456",
+            full_name="Trần Minh Vũ",
+            role=Role.USER,
+            credit_balance=150,
+            plan="Starter Free"
         )
 
     def create_user(
@@ -49,8 +61,10 @@ class AuthService:
         email: str,
         password: str,
         full_name: str,
-        role: Role = Role.DOCTOR,
-        department: Optional[str] = None
+        role: Role = Role.CREATOR,
+        credit_balance: int = 150,
+        plan: str = "Pro Creator",
+        avatar_url: Optional[str] = None
     ) -> UserInDB:
         email_normalized = email.lower().strip()
         if email_normalized in self._users:
@@ -65,11 +79,31 @@ class AuthService:
             full_name=full_name,
             role=role,
             is_active=True,
-            department=department,
+            credit_balance=credit_balance,
+            plan=plan,
+            avatar_url=avatar_url or "https://images.unsplash.com/photo-1534528741775-53994a69daeb?auto=format&fit=crop&w=200&q=80",
             hashed_password=hashed
         )
         self._users[email_normalized] = user_db
         return user_db
+
+    def deduct_credits(self, email: str, amount: int) -> int:
+        email_normalized = email.lower().strip()
+        user = self._users.get(email_normalized)
+        if not user:
+            raise AppException("Người dùng không tồn tại", code="USER_NOT_FOUND")
+        if user.credit_balance < amount:
+            raise AppException("Số dư credits không đủ để thực hiện tạo tác vụ này", code="INSUFFICIENT_CREDITS")
+        user.credit_balance -= amount
+        return user.credit_balance
+
+    def add_credits(self, email: str, amount: int) -> int:
+        email_normalized = email.lower().strip()
+        user = self._users.get(email_normalized)
+        if not user:
+            raise AppException("Người dùng không tồn tại", code="USER_NOT_FOUND")
+        user.credit_balance += amount
+        return user.credit_balance
 
     def authenticate(self, login_data: LoginRequest) -> TokenResponse:
         email = login_data.email.lower().strip()

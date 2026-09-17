@@ -8,15 +8,18 @@ from app.core.config import settings
 from app.core.exceptions import AppException, app_exception_handler, global_exception_handler
 from app.core.middleware import SecurityHeadersMiddleware, RateLimiterMiddleware
 from app.modules.auth import auth_router
-from app.modules.patients import patients_router
-from app.modules.telemetry import telemetry_router
-from app.modules.alerts import alerts_router
+from app.modules.video_generation import video_router
+from app.modules.fast_apps import fast_apps_router
+from app.modules.tiktok_tools import tiktok_router
+from app.modules.credits import credits_router
+from app.modules.admin_ops import admin_ops_router
+from app.modules.voice_studio import voice_router
 
 # Initialize FastAPI Application with metadata
 app = FastAPI(
     title=settings.PROJECT_NAME,
     version=settings.VERSION,
-    description="Enterprise Vital Signs Telemetry & Clinical Anomaly Alerting API",
+    description="PlenxAI - Generative AI Video, Image, TikTok Prompt Extractor & Automation Platform",
     docs_url="/docs",
     redoc_url="/redoc",
     openapi_url=f"{settings.API_V1_STR}/openapi.json"
@@ -40,11 +43,14 @@ app.add_middleware(
 app.add_exception_handler(AppException, app_exception_handler)
 app.add_exception_handler(Exception, global_exception_handler)
 
-# 4. Register Modular Routers under /api/v1
+# 4. Register PlenxAI Modular Routers under /api/v1
 app.include_router(auth_router, prefix=settings.API_V1_STR)
-app.include_router(patients_router, prefix=settings.API_V1_STR)
-app.include_router(telemetry_router, prefix=settings.API_V1_STR)
-app.include_router(alerts_router, prefix=settings.API_V1_STR)
+app.include_router(video_router, prefix=settings.API_V1_STR)
+app.include_router(fast_apps_router, prefix=settings.API_V1_STR)
+app.include_router(tiktok_router, prefix=settings.API_V1_STR)
+app.include_router(credits_router, prefix=settings.API_V1_STR)
+app.include_router(voice_router, prefix=settings.API_V1_STR)
+app.include_router(admin_ops_router, prefix=settings.API_V1_STR)
 
 
 @app.get("/", tags=["Health & System"])

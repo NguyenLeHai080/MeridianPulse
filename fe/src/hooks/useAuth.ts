@@ -1,5 +1,5 @@
 import { useAuthStore } from '@/store/auth.store';
-import { Role } from '@/core/types/auth.types';
+import { Role } from '@/core/types/plenx.types';
 
 export const useAuth = () => {
   const { user, isAuthenticated, isLoading, logout, loginSuccess } = useAuthStore();
@@ -9,7 +9,7 @@ export const useAuth = () => {
     return allowedRoles.includes(user.role);
   };
 
-  const isDoctor = user?.role === 'DOCTOR' || user?.role === 'ADMIN';
+  const isCreator = user?.role === 'CREATOR' || user?.role === 'VIP_CREATOR' || user?.role === 'ADMIN';
   const isAdmin = user?.role === 'ADMIN';
 
   return {
@@ -17,7 +17,7 @@ export const useAuth = () => {
     isAuthenticated,
     isLoading,
     hasRole,
-    isDoctor,
+    isCreator,
     isAdmin,
     logout,
     loginSuccess,

@@ -1,5 +1,5 @@
 import { create } from 'zustand';
-import { User, TokenResponse, Role } from '@/core/types/auth.types';
+import { User, TokenResponse, Role } from '@/core/types/plenx.types';
 import { ENV_CONFIG } from '@/config/env.config';
 
 interface AuthStoreState {
@@ -11,9 +11,11 @@ interface AuthStoreState {
   loginSuccess: (tokens: TokenResponse) => void;
   logout: () => void;
   initializeAuth: () => void;
+  deductCredits: (amount: number) => boolean;
+  addCredits: (amount: number) => void;
 }
 
-export const useAuthStore = create<AuthStoreState>((set) => ({
+export const useAuthStore = create<AuthStoreState>((set, get) => ({
   user: null,
   accessToken: null,
   refreshToken: null,
@@ -33,20 +35,22 @@ export const useAuthStore = create<AuthStoreState>((set) => ({
           isLoading: false,
         });
       } else {
-        // Seed initial default authenticated session in demo mode for effortless test
-        const defaultDoctor: User = {
-          id: 'doc-001',
-          email: 'doctor@meridianpulse.health',
-          full_name: 'BS.CKII Trần Minh Đức',
-          role: 'DOCTOR' as Role,
+        // Seed default Admin session for instant testing matching user account
+        const defaultAdmin: User = {
+          id: 'usr-admin-01',
+          email: 'haiyuanhai9@gmail.com',
+          full_name: 'Nguyễn Lê Hải (Plenx Super Admin)',
+          role: 'ADMIN' as Role,
           is_active: true,
-          department: 'Khoa Hồi Sức Cấp Cứu (ICU)',
+          credit_balance: 999999,
+          avatar_url: 'https://images.unsplash.com/photo-1534528741775-53994a69daeb?auto=format&fit=crop&w=200&q=80',
+          plan: 'Enterprise Sovereign VIP',
         };
-        localStorage.setItem(`${ENV_CONFIG.STORAGE_PREFIX}access_token`, 'demo_jwt_token');
-        localStorage.setItem(`${ENV_CONFIG.STORAGE_PREFIX}user`, JSON.stringify(defaultDoctor));
+        localStorage.setItem(`${ENV_CONFIG.STORAGE_PREFIX}access_token`, 'plenx_jwt_token');
+        localStorage.setItem(`${ENV_CONFIG.STORAGE_PREFIX}user`, JSON.stringify(defaultAdmin));
         set({
-          accessToken: 'demo_jwt_token',
-          user: defaultDoctor,
+          accessToken: 'plenx_jwt_token',
+          user: defaultAdmin,
           isAuthenticated: true,
           isLoading: false,
         });
@@ -80,5 +84,23 @@ export const useAuthStore = create<AuthStoreState>((set) => ({
       isAuthenticated: false,
       isLoading: false,
     });
+  },
+
+  deductCredits: (amount: number) => {
+    const currentUser = get().user;
+    if (!currentUser) return false;
+    if (currentUser.credit_balance < amount) return false;
+    const updatedUser = { ...currentUser, credit_balance: currentUser.credit_balance - amount };
+    localStorage.setItem(`${ENV_CONFIG.STORAGE_PREFIX}user`, JSON.stringify(updatedUser));
+    set({ user: updatedUser });
+    return true;
+  },
+
+  addCredits: (amount: number) => {
+    const currentUser = get().user;
+    if (!currentUser) return;
+    const updatedUser = { ...currentUser, credit_balance: currentUser.credit_balance + amount };
+    localStorage.setItem(`${ENV_CONFIG.STORAGE_PREFIX}user`, JSON.stringify(updatedUser));
+    set({ user: updatedUser });
   },
 }));
