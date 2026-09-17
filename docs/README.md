@@ -33,6 +33,19 @@ docs/
     ├── gitflow-workflow.md                   # Cấu trúc 3 nhánh chính (prod, staging, dev) & Hotfix 3 chiều
     ├── commit-and-issue-conventions.md       # Quy chuẩn commit message bắt buộc gắn #Issue_ID & Git Hook
     └── branch-protection-and-review.md       # Hướng dẫn khóa nhánh GitHub & checklist PR Code Review
+
+---
+
+## 🚀 Bản Thiết Kế Hệ Thống AI Creator Toàn Diện (PlenxAI 100% Architecture)
+
+Nếu bạn phát triển một nền tảng **Generative AI Creator Platform** (Video AI Veo/Kling, Image, Voice, E-commerce Fast Apps, Marketplace, Franchise White-label) tương đương PlenxAI, hãy tham khảo toàn bộ hồ sơ kỹ thuật tại:
+
+📂 **[docs/ai-creator-blueprint/](ai-creator-blueprint/README.md)**:
+- [01-system-architecture.md](ai-creator-blueprint/01-system-architecture.md): Kiến trúc hệ thống, BullMQ Queue, Proxy Farm & Upstream AI Orchestration.
+- [02-core-features-spec.md](ai-creator-blueprint/02-core-features-spec.md): Đặc tả Video Studio (Veo, Kling, Motion Brush), Fast Apps TVC, TikTok Scraper.
+- [03-business-and-monetization.md](ai-creator-blueprint/03-business-and-monetization.md): Công thức định giá Credits, gói thuê bao MRR và mô hình nhượng quyền B2B (Franchise).
+- [04-admin-operations.md](ai-creator-blueprint/04-admin-operations.md): Cẩm nang vận hành trang Quản trị (`/admin`), Pool Manager, NSFW filter.
+- [05-scrum-implementation-roadmap.md](ai-creator-blueprint/05-scrum-implementation-roadmap.md): Lộ trình triển khai thực tế 8 Sprints (4 tháng).
 ```
 
 ---
