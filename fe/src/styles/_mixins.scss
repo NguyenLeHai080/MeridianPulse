@@ -1,0 +1,24 @@
+@use "variables" as *;
+
+// Glassmorphism HUD Card
+@mixin glass-panel {
+  background: $bg-card;
+  border: 1px solid $border-glass;
+  backdrop-filter: blur(14px);
+  -webkit-backdrop-filter: blur(14px);
+  border-radius: 16px;
+  transition: $transition-smooth;
+}
+
+// Flex Center Shortcut
+@mixin flex-center {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+// Neon Glow Pulse
+@mixin pulse-glow($color, $shadow) {
+  box-shadow: $shadow;
+  border-color: rgba($color, 0.4);
+}

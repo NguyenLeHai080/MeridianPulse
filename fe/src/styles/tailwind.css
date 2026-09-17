@@ -1,0 +1,17 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+@layer components {
+  .hud-panel {
+    @apply bg-dark-900/80 border border-white/10 rounded-2xl backdrop-blur-md transition-all duration-300;
+  }
+
+  .hud-panel-hover {
+    @apply hover:border-cyan-500/30 hover:shadow-glow-cyan hover:-translate-y-0.5;
+  }
+
+  .hud-button-primary {
+    @apply px-4 py-2 bg-gradient-to-r from-cyan-500 to-emerald-500 text-white font-semibold rounded-xl shadow-glow-cyan hover:opacity-95 active:scale-95 transition-all duration-150 disabled:opacity-50 disabled:pointer-events-none;
+  }
+}
