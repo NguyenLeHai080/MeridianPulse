@@ -9,17 +9,20 @@ import { TikTokScraperPage } from '@/modules/tiktok_tools/pages/TikTokScraperPag
 import { VoiceStudioPage } from '@/modules/voice_studio/pages/VoiceStudioPage';
 import { PricingPlansPage } from '@/modules/billing/pages/PricingPlansPage';
 import { AdminConsolePage } from '@/modules/admin_ops/pages/AdminConsolePage';
+import { PlenxLandingPage } from '@/modules/home/pages/PlenxLandingPage';
 
 export const AppRoutes: React.FC = () => {
   return (
     <Routes>
-      {/* Public Authentication Route */}
+      {/* 1. Public PlenxAI Homepage & Creative Showcase Hub */}
+      <Route path="/" element={<PlenxLandingPage />} />
+
+      {/* 2. Public Authentication Route */}
       <Route path="/login" element={<LoginPage />} />
 
-      {/* Protected PlenxAI Creator Workstation Routes */}
+      {/* 3. Protected PlenxAI Creator Workstation Routes */}
       <Route element={<AuthGuard />}>
         <Route element={<AppLayout />}>
-          <Route path="/" element={<Navigate to="/studio" replace />} />
           <Route path="/studio" element={<VideoStudioPage />} />
           <Route path="/fast-apps" element={<FastAppsPage />} />
           <Route path="/tiktok-tools" element={<TikTokScraperPage />} />
@@ -30,7 +33,7 @@ export const AppRoutes: React.FC = () => {
       </Route>
 
       {/* Fallback */}
-      <Route path="*" element={<Navigate to="/studio" replace />} />
+      <Route path="*" element={<Navigate to="/" replace />} />
     </Routes>
   );
 };

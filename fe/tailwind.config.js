@@ -20,6 +20,15 @@ export default {
           amber: '#f59e0b',
           rose: '#f43f5e',
           purple: '#a855f7',
+        },
+        plenx: {
+          pink: '#d946ef',
+          fuchsia: '#c026d3',
+          purple: '#9333ea',
+          violet: '#7c3aed',
+          cyan: '#06b6d4',
+          darkBg: '#080c16',
+          cardBg: '#0f172a',
         }
       },
       fontFamily: {
@@ -30,6 +39,8 @@ export default {
         'glow-cyan': '0 0 20px rgba(6, 182, 212, 0.3)',
         'glow-green': '0 0 20px rgba(16, 185, 129, 0.3)',
         'glow-rose': '0 0 20px rgba(244, 63, 94, 0.3)',
+        'glow-pink': '0 0 25px rgba(217, 70, 239, 0.45)',
+        'glow-purple': '0 0 25px rgba(168, 85, 247, 0.45)',
       },
       animation: {
         'pulse-slow': 'pulse 2.5s cubic-bezier(0.4, 0, 0.6, 1) infinite',
