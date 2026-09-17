@@ -1,72 +1,48 @@
-# Trung Tâm Tài Liệu Nghiệp Vụ & Kỹ Thuật (MeridianPulse Docs)
+# Trung Tâm Tài Liệu Chuẩn Scrum - MeridianPulse
 
-Chào mừng bạn đến với kho tài liệu tiêu chuẩn kỹ thuật và nghiệp vụ Scrum của dự án **MeridianPulse** (Hệ Thống Giám Sát & Quản Lý Chỉ Số Sinh Tồn Thời Gian Thực). Toàn bộ tài liệu được phân chia thành các thư mục chuyên biệt theo từng miền nghiệp vụ và quy trình.
+Chào mừng bạn đến với kho tài liệu chuẩn hóa theo **Khung Scrum (Scrum Framework)** và **Quy trình Gitflow** của dự án **MeridianPulse** (Nền Tảng Giám Sát Sinh Tồn Thời Gian Thực).
 
 ---
 
-## 🏛️ Cấu Trúc Thư Mục Nghiệp Vụ (Directory Architecture)
+## 🏛️ Cấu Trúc 4 Cột Trụ Chuẩn Scrum (4-Pillar Scrum Architecture)
+
+Toàn bộ tài liệu trong thư mục [docs/](file:///e:/Projects/MeridianPulse/docs) được tổ chức theo đúng 3 Artifacts chính thống của Scrum và quy trình kỹ thuật Gitflow:
 
 ```text
 docs/
-├── README.md                                    # Tài liệu này (Mục lục trung tâm)
+├── README.md                                 # [TRANG CHỦ DỰ ÁN] - Tổng quan sản phẩm & điều hướng
 │
-├── 00-gitflow-workflow/                        # [Quy trình Gitflow & Quản lý Nhánh]
-│   ├── README.md                                # Tổng quan quy trình Git & Cheat-sheet
-│   ├── branching-strategy.md                    # Cấu trúc 3 nhánh chính (prod, staging, dev) & nhánh tạm
-│   ├── commit-convention.md                     # Quy chuẩn Conventional Commits kèm mã Issue ID (#MP-xx)
-│   ├── hotfix-and-sync-process.md               # Quy trình vá lỗi khẩn cấp & đồng bộ 3 chiều
-│   └── branch-protection-and-review.md          # Hướng dẫn khóa nhánh GitHub & checklist Code Review
+├── 01-product-backlog/                       # [ARTIFACT 1: PRODUCT BACKLOG - KHO YÊU CẦU CỐT LÕI]
+│   ├── README.md                             # Bảng Master Product Backlog (Tổng hợp User Stories, SP, Priority, Trạng thái)
+│   ├── epic-01-core-platform.md              # EPIC 01: Giao diện HUD & Sóng ECG nhịp tim (#MP-01) - [DONE]
+│   ├── epic-02-identity-access.md            # EPIC 02: Xác thực JWT & Phân quyền Bác sĩ/Y tá/Bệnh nhân (#MP-02)
+│   ├── epic-03-vital-telemetry.md            # EPIC 03: Kênh truyền WebSocket thời gian thực độ trễ < 200ms (#MP-03)
+│   ├── epic-04-anomaly-alerting.md           # EPIC 04: Động cơ phát hiện bất thường & Cảnh báo khẩn cấp (#MP-04)
+│   └── epic-05-clinical-records.md           # EPIC 05: Hồ sơ bệnh án & Báo cáo xu hướng Holter ECG 24h (#MP-05)
 │
-├── 01-scrum-framework/                         # [Khung Vận Hành Scrum & Agile]
-│   ├── README.md                                # Tổng quan nguyên tắc Scrum
-│   ├── roles-and-ceremonies.md                  # Vai trò (PO, SM, Dev Team) & chu kỳ Sprint 2 tuần
-│   ├── definition-of-ready-and-done.md          # Bộ tiêu chuẩn Sẵn sàng (DoR) và Hoàn thành (DoD)
-│   └── git-scrum-integration-matrix.md          # Ma trận ánh xạ Issue ID, Branch, PR, Releases
+├── 02-sprint-backlog/                        # [ARTIFACT 2: SPRINT BACKLOG - KẾ HOẠCH TỪNG CHU KỲ]
+│   ├── README.md                             # Lộ trình phát triển sản phẩm (Product Roadmap)
+│   ├── sprint-01-foundation.md               # Sprint 01: Thiết lập nền tảng & Homepage Dashboard (11 SP - DONE)
+│   └── sprint-02-telemetry-security.md       # Sprint 02: Kênh Telemetry & Xác thực phân quyền (16 SP - ACTIVE)
 │
-├── 02-business-epics/                          # [CÁC MIỀN NGHIỆP VỤ CỐT LÕI (DOMAINS & USER STORIES)]
-│   ├── README.md                                # Sơ đồ kiến trúc tổng thể các miền nghiệp vụ
-│   ├── epic-01-core-platform/                  # Nghiệp vụ Giao diện & Bảng điều khiển HUD
-│   │   ├── README.md                            # Phạm vi nghiệp vụ UI/UX
-│   │   └── MP-01-homepage-dashboard.md          # User Story #MP-01 (Acceptance Criteria Gherkin, DoD)
-│   ├── epic-02-identity-access/                 # Nghiệp vụ Định danh & Phân quyền (IAM)
-│   │   ├── README.md                            # Ma trận phân quyền Bác sĩ / Y tá / Bệnh nhân
-│   │   └── MP-02-auth-rbac.md                   # User Story #MP-02 (JWT, Refresh Token, RBAC)
-│   ├── epic-03-vital-telemetry/                 # Nghiệp vụ Kênh Tín hiệu Sinh tồn Realtime
-│   │   ├── README.md                            # Tiêu chuẩn luồng dữ liệu WebSocket, độ trễ < 200ms
-│   │   └── MP-03-telemetry-engine.md            # User Story #MP-03 (BPM, SpO2, Sóng ECG 60 FPS)
-│   ├── epic-04-anomaly-alerting/                # Nghiệp vụ Phát hiện Bất thường & Báo động Khẩn cấp
-│   │   ├── README.md                            # Bảng ngưỡng cảnh báo lâm sàng (Nhịp nhanh/chậm)
-│   │   └── MP-04-critical-anomaly-alerts.md     # User Story #MP-04 (Cảnh báo thị giác & âm thanh)
-│   └── epic-05-clinical-records/                # Nghiệp vụ Hồ sơ Bệnh án & Thống kê Lâm sàng
-│       ├── README.md                            # Báo cáo xu hướng nhịp tim 24h & Holter ECG
-│       └── MP-05-historical-analytics.md        # User Story #MP-05 (Trích xuất hồ sơ bệnh án PDF)
+├── 03-scrum-governance/                      # [QUY TRÌNH VẬN HÀNH SCRUM & TIÊU CHUẨN ĐỘI NGŨ]
+│   ├── roles-and-ceremonies.md               # Vai trò (PO, SM, Dev Team) & 4 sự kiện Sprint 2 tuần
+│   └── definition-of-ready-and-done.md       # Tiêu chuẩn Sẵn sàng (DoR) và Hoàn thành (DoD)
 │
-└── 03-sprints/                                 # [Kế Hoạch & Nhật Ký Sprint Backlog]
-    ├── README.md                                # Lộ trình phát triển sản phẩm (Product Roadmap)
-    ├── sprint-01-foundation/                    # Sprint 01: Thiết lập nền tảng & Homepage Dashboard
-    │   └── sprint-backlog.md                    # Danh sách PBI, cam kết 11 Story Points (Đã xong)
-    └── sprint-02-telemetry-security/            # Sprint 02: Xác thực bảo mật & Luồng dữ liệu sinh tồn
-        └── sprint-backlog.md                    # Danh sách PBI, cam kết 16 Story Points (Đang làm)
+└── 04-gitflow-guidelines/                    # [KỸ THUẬT & QUY TRÌNH PHÂN PHỐI NHÁNH GITFLOW]
+    ├── gitflow-workflow.md                   # Cấu trúc 3 nhánh chính (prod, staging, dev) & Hotfix 3 chiều
+    ├── commit-and-issue-conventions.md       # Quy chuẩn commit message bắt buộc gắn #Issue_ID & Git Hook
+    └── branch-protection-and-review.md       # Hướng dẫn khóa nhánh GitHub & checklist PR Code Review
 ```
 
 ---
 
-## 🚀 Hướng Dẫn Nhanh Dành Cho Thành Viên Dự Án
+## ⚡ Bảng Tra Cứu Nhanh Cho Thành Viên
 
-1. **Bắt đầu công việc mới:**
-   - Xem User Story trong thư mục [02-business-epics/](02-business-epics/) để nắm rõ **Acceptance Criteria**.
-   - Tạo nhánh tính năng từ `dev`:
-     ```bash
-     git switch dev
-     git pull origin dev
-     git switch -c feat/<issue_id>-<ten_tinh_nang>
-     ```
-2. **Commit mã nguồn:**
-   - Bắt buộc phải gắn mã Issue ID (được kiểm tra tự động bởi Git hook):
-     ```bash
-     git commit -m "feat: add real-time ecg pulse monitor #MP-01"
-     ```
-3. **Mở Pull Request:**
-   - Mở PR từ nhánh tính năng vào **`dev`**. Điền checklist theo mẫu [.github/pull_request_template.md](../.github/pull_request_template.md).
-4. **Quy trình Release & Hotfix:**
-   - Xem chi tiết tại [00-gitflow-workflow/hotfix-and-sync-process.md](00-gitflow-workflow/hotfix-and-sync-process.md).
+| Nhiệm Vụ Của Bạn | Tài Liệu Cần Xem | Đường Dẫn |
+| :--- | :--- | :--- |
+| **Xem toàn bộ tính năng & User Stories** | Master Product Backlog | [01-product-backlog/README.md](01-product-backlog/README.md) |
+| **Xem công việc Sprint đang chạy** | Sprint 02 Backlog | [02-sprint-backlog/sprint-02-telemetry-security.md](02-sprint-backlog/sprint-02-telemetry-security.md) |
+| **Xem tiêu chuẩn để đưa task vào làm / đóng task** | DoR và DoD Checklist | [03-scrum-governance/definition-of-ready-and-done.md](03-scrum-governance/definition-of-ready-and-done.md) |
+| **Cách đặt tên nhánh, viết commit đúng chuẩn** | Quy chuẩn Commit & Issue ID | [04-gitflow-guidelines/commit-and-issue-conventions.md](04-gitflow-guidelines/commit-and-issue-conventions.md) |
+| **Quy trình merge code, xử lý lỗi khẩn cấp** | Gitflow & Hotfix 3 chiều | [04-gitflow-guidelines/gitflow-workflow.md](04-gitflow-guidelines/gitflow-workflow.md) |

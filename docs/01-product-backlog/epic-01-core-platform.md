@@ -1,16 +1,19 @@
-# User Story #MP-01: Giao Diện Bảng Điều Khiển Tổng Quan (Homepage Dashboard)
+# EPIC-01: Giao Diện Nền Tảng & Bảng Điều Khiển Tổng Quan (Core Platform & Dashboard)
 
-- **Epic:** `EPIC-01 - Core Platform & Dashboard Layout`
+- **Trạng thái Epic:** ✅ **Hoàn thành (DONE trong Sprint 01)**
+- **Mã Epic:** `EPIC-01`
 - **Mã Issue:** `#MP-01`
-- **Độ ưu tiên:** `P0 - High`
-- **Điểm ước lượng (Story Points):** `5`
-- **Sprint thực hiện:** `Sprint 01`
-- **Nhánh Git tương ứng:** `feat/MP-01-homepage-dashboard` (hoặc `feat/homepage`)
-- **Tệp mã nguồn liên quan:** [fe/index.html](file:///e:/Projects/MeridianPulse/fe/index.html)
+- **Nhánh Git phụ trách:** `feat/MP-01-homepage-dashboard`
+- **Mã nguồn thực thi:** [fe/index.html](../../fe/index.html)
 
 ---
 
-## 1. Mô Tả Người Dùng (User Story)
+## 1. Tuyên Bố Phạm Vi Nghiệp Vụ
+EPIC-01 cung cấp lớp trải nghiệm người dùng (Frontend Web HUD) trực quan, chuẩn y tế, phản hồi nhanh và thân thiện với đội ngũ nhân viên y tế tại khoa cấp cứu và hồi sức tích cực (ICU).
+
+---
+
+## 2. Đặc Tả Chi Tiết User Story #MP-01
 
 > **Là một** Y bác sĩ hoặc Điều dưỡng viên trực ca,  
 > **Tôi muốn** truy cập một trang chủ trực quan hiển thị tổng quan các giường bệnh/bệnh nhân cùng nhịp tim trung bình, trạng thái kết nối thiết bị và danh sách cảnh báo mới nhất,  
@@ -18,7 +21,7 @@
 
 ---
 
-## 2. Tiêu Chuẩn Chấp Nhận (Acceptance Criteria - Given/When/Then)
+## 3. Tiêu Chuẩn Chấp Nhận (Acceptance Criteria - Given/When/Then)
 
 ### Scenario 1: Bảng chỉ số tổng quan nhanh (KPI Overview Cards)
 - **Given** người dùng truy cập trang chủ `fe/index.html`,
